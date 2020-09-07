@@ -1,0 +1,48 @@
+<resources>
+    <string-array name="category_array">
+        <item>National</item>
+        <item>Economy</item>
+        <item>Sports</item>
+        <item>Technology</item>
+    </string-array>
+    <string name="app_name">NewsManagerProject</string>
+    <string name="title_activity_login">Sign in</string>
+    <string name="prompt_email">Email</string>
+    <string name="prompt_password">Password</string>
+    <string name="action_sign_in">Sign in or register</string>
+    <string name="action_sign_in_short">Sign in</string>
+    <string name="welcome">"Welcome !"</string>
+    <string name="invalid_username">Not a valid username</string>
+    <string name="invalid_password">Password must be >5 characters</string>
+    <string name="login_failed">"Login failed"</string>
+    <string name="category">Category</string>
+    <string name="tittle">Tittle</string>
+    <string name="newsabstract">Abstract</string>
+    <string name="newsimage">NewsImage</string>
+    <string name="login">Login</string>
+    <string name="create_category">Category</string>
+    <string name="create_title">Create Title</string>
+    <string name="create_subtitle">Create subtitle</string>
+    <string name="create_abstract">Create Abstract</string>
+    <string name="create_body">Create Body</string>
+    <string name="subtitle_created">Subtitle</string>
+    <string name="title_created">Title</string>
+    <string name="abstract_created">Abstract</string>
+    <string name="body_created">Body</string>
+    <string name="article_data_created">Article Data</string>
+    <string name="category_created">Category</string>
+    <string name="user_name">User Name</string>
+    <string name="password">Password</string>
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+    <string name="national_category">National</string>
+    <string name="economy_category">Economy</string>
+    <string name="sports_category">Sports</string>
+    <string name="technology_category">Technology</string>
+    <string name="all_category">All</string>
+    <string name="categories_category">Categories</string>
+    <string name="home_nav">Home</string>
+    <string name="create_nav">Create</string>
+    <string name="logout_nav">Logout</string>
+    <string name="logout_menu">LogOut</string>
+</resources>

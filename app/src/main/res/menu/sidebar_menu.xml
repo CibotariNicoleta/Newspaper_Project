@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <group android:checkableBehavior="single">
+        <item
+            android:id='@+id/nav_home'
+            android:icon="@drawable/ic_home"
+            android:title="@string/home_nav" />
+        <item
+            android:id='@+id/nav_create'
+            android:icon="@drawable/ic_addarticle"
+            android:title="@string/create_nav"
+            android:visible="false" />
+    </group>
+
+    <item android:title="@string/categories_category">
+        <menu>
+            <item
+                android:id="@+id/category_national"
+                android:icon="@drawable/ic_symbol_national"
+                android:title="@string/national_category" />
+            <item
+                android:id="@+id/category_economy"
+                android:icon="@drawable/ic_business"
+                android:title="@string/economy_category" />
+            <item
+                android:id="@+id/category_sports"
+                android:icon="@drawable/ic_sports"
+                android:title="@string/sports_category" />
+            <item
+                android:id="@+id/category_technology"
+                android:icon="@drawable/ic_technology_category"
+                android:title="@string/technology_category" />
+            <item
+                android:id="@+id/category_all"
+                android:icon="@drawable/ic_all_category"
+                android:title="@string/all_category" />
+        </menu>
+    </item>
+    <item android:title="">
+        <menu>
+            <item
+                android:id='@+id/nav_logout'
+                android:icon="@drawable/ic_logout"
+                android:title="@string/logout_nav"
+                android:visible="false" />
+        </menu>
+    </item>
+
+</menu>
