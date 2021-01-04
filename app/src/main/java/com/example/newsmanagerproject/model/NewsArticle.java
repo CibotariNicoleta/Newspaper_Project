@@ -1,18 +1,20 @@
 package com.example.newsmanagerproject.model;
 
-import androidx.appcompat.app.AppCompatActivity;
-
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.util.Base64;
-import android.util.Log;
+import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
+
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.newsmanagerproject.R;
+import com.example.newsmanagerproject.database.ArticleDB;
 import com.example.newsmanagerproject.network.errors.ServerComnmunicationError;
-import com.google.android.material.snackbar.Snackbar;
 
 public class NewsArticle extends AppCompatActivity {
     private Article articleNews;
@@ -22,13 +24,13 @@ public class NewsArticle extends AppCompatActivity {
     private TextView textBody;
     private TextView textTitle;
     private ImageView articleImage;
-
+    private ImageView articleLocation;
+    private int ArticleId;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_news_article);
-
         articleNews=(Article)getIntent().getSerializableExtra("Article");
 
         textTitle=(TextView) findViewById(R.id.text_title);
@@ -42,6 +44,8 @@ public class NewsArticle extends AppCompatActivity {
 
         textAbstract=(TextView) findViewById(R.id.text_abstract);
         textAbstract.setText(articleNews.getAbstractText());
+
+        articleLocation=(ImageView) findViewById(R.id.articleLocation);
 
         textBody=(TextView) findViewById(R.id.text_body);
         textBody.setText(articleNews.getBodyText());
@@ -66,9 +70,50 @@ public class NewsArticle extends AppCompatActivity {
                 articleImage.setImageBitmap(decodedByte);
 
                 articleImage.setImageBitmap(decodedByte);
+            } else if(articleNews.getImageByte() != null){
+                decodedString = articleNews.getImageByte();
+                Bitmap bitmap = BitmapFactory.decodeByteArray(decodedString, 0, decodedString.length);
+
+
+                articleImage.setImageBitmap(bitmap);
+
             }
         } catch (ServerComnmunicationError serverComnmunicationError) {
             serverComnmunicationError.printStackTrace();
         }
+        
+        ArticleId = articleNews.getId();
+        articleLocation.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(articleNews.getIdUser()!=0){
+                Mapp mapp = ArticleDB.getArticleLocation(ArticleId);
+
+                if(mapp != null) {
+                    Intent intent = new Intent(articleLocation.getContext(), MapsApp.class);
+                    intent.putExtra("location", mapp);
+                    startActivity(intent);
+                    } else {
+                      Toast.makeText(NewsArticle.this, "Sorry! Location is not available", Toast.LENGTH_SHORT).show();
+
+                    }
+
+                }
+            }
+        });
+    }
+
+
+    @Override
+    public void onBackPressed(){
+        super.onBackPressed();
+        Intent intent;
+        if(UserPage.onBack) {
+             intent = new Intent(this, UserPage.class);
+        } else{
+             intent = new Intent(this, MainActivity.class);
+        }
+        startActivity(intent);
+        finish();
     }
 }

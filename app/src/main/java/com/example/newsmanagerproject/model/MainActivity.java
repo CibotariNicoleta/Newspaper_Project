@@ -1,53 +1,34 @@
 package com.example.newsmanagerproject.model;
 
 import android.content.Intent;
-import android.graphics.Color;
 import android.os.Build;
 import android.os.Bundle;
-
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.AdapterView;
-import android.widget.ListView;
-
 
 import androidx.annotation.NonNull;
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
-import androidx.constraintlayout.widget.Group;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
-import androidx.lifecycle.Observer;
-import androidx.lifecycle.ViewModelProvider;
 
-
-import com.example.newsmanagerproject.LoadArticlesTask;
-import com.example.newsmanagerproject.Login;
-import com.example.newsmanagerproject.MyArticleModel;
 import com.example.newsmanagerproject.R;
 import com.example.newsmanagerproject.database.ArticleDB;
 import com.example.newsmanagerproject.database.ArticleDatabaseHelper;
 import com.example.newsmanagerproject.network.LoginTask;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.navigation.NavigationView;
-import com.google.android.material.snackbar.Snackbar;
-
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Observable;
-import java.util.concurrent.ExecutionException;
 
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
     private Shared shared;
-
     public static FloatingActionButton loginButton;
+
 
     ArticleDatabaseHelper dbHelper = new ArticleDatabaseHelper(getBaseContext());
 
@@ -61,11 +42,14 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        //ArticleDB articleDB = new ArticleDB(getApplicationContext());
+        //shared preferences
         shared = new Shared(getApplicationContext());
         shared.firstTime();
         this.runOnUiThread(new Runnable() {
             @Override
             public void run() {
+                UserPage.onBack = false;
                 //Create FragmentManager
                 FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
 
@@ -101,6 +85,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                     Menu navMenus=navigationView.getMenu();
                     navMenus.findItem(R.id.nav_logout).setVisible(true);
                     navMenus.findItem(R.id.nav_create).setVisible(true);
+                     navMenus.findItem(R.id.nav_userpage).setVisible(true);
                 }
                 loginButton.setOnClickListener(new View.OnClickListener() {
                     @Override
@@ -124,8 +109,12 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 startActivity(intentHome);
                 break;
             case R.id.nav_create:
-                Intent intentAddArticle = new Intent(this, creatArticle.class);
+                Intent intentAddArticle = new Intent(this, CreatArticle.class);
                 startActivity(intentAddArticle);
+                break;
+            case R.id.nav_userpage:
+                Intent intentuser = new Intent(this, UserPage.class);
+                startActivity(intentuser);
                 break;
             case R.id.category_national:
                 f = new NationalFragment();

@@ -1,22 +1,16 @@
 package com.example.newsmanagerproject;
 
-import androidx.lifecycle.LiveData;
-import androidx.lifecycle.MutableLiveData;
-import androidx.lifecycle.Observer;
-import androidx.lifecycle.ViewModel;
-
 import com.example.newsmanagerproject.database.ArticleDB;
 import com.example.newsmanagerproject.model.Article;
 
 import java.text.ParseException;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
-import java.util.Objects;
-import java.util.concurrent.ExecutionException;
 
 public class MyArticleModel {
-    private static List<Article> articles;
+    public static List<Article> articles;
 
     /**
      * getArticles(): This method initialize list articles data to
@@ -27,7 +21,8 @@ public class MyArticleModel {
         if (articles == null) {
             articles = new ArrayList<Article>();
             loadArticles();
-        }
+            Collections.reverse(articles);
+         }
         return articles;
     }
 

@@ -42,7 +42,9 @@
     <string name="all_category">All</string>
     <string name="categories_category">Categories</string>
     <string name="home_nav">Home</string>
+    <string name="nav_userpage">User Page</string>
     <string name="create_nav">Create</string>
     <string name="logout_nav">Logout</string>
     <string name="logout_menu">LogOut</string>
+    <string name="title_activity_maps_app">Map</string>
 </resources>

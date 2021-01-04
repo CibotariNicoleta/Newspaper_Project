@@ -7,7 +7,6 @@ import android.os.Message;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AbsListView;
 import android.widget.ListView;
 
 import androidx.annotation.NonNull;
@@ -18,6 +17,7 @@ import com.example.newsmanagerproject.MyArticleModel;
 import com.example.newsmanagerproject.R;
 import com.example.newsmanagerproject.database.ArticleDB;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.google.firebase.auth.FirebaseAuth;
 
 import java.text.ParseException;
 import java.util.ArrayList;
@@ -25,12 +25,11 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
 
-public class SportsFragment extends Fragment {
-
+public class UserFragment extends Fragment {
     private List<Article> listRes;
     private ListView listView;
     private FloatingActionButton loginButon;
-    private NewsAdapter sportsAdapter;
+    private NewsAdapter userAdapter;
     private View root;
 
     public View footerView;
@@ -40,50 +39,47 @@ public class SportsFragment extends Fragment {
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        root=inflater.inflate(R.layout.fragment_sports,container,false);
+        root = inflater.inflate(R.layout.fragment_user, container, false);
+       // listRes = ArticleDB.getUserArticles(ArticleDB.getUserId(FirebaseAuth.getInstance().getCurrentUser().getEmail()));
 
-        try {
-            listRes= MyArticleModel.getArticles();
+            listRes = ArticleDB.getUserArticles(ArticleDB.getUserId(FirebaseAuth.getInstance().getCurrentUser().getEmail()));
             Collections.reverse(listRes);
-        } catch (ParseException e) {
-            e.printStackTrace();
-        }
+
+
 
         //Set the footer
         LayoutInflater li = (LayoutInflater) this.getContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         footerView = li.inflate(R.layout.footer_view, null);
-
         initListView();
         //Create handler
         mhandler = new MyHandler();
-
         return root;
     }
 
-
-    private void initListView(){
+    private void initListView() {
         // This part will show a list of articles
-        listView = root.findViewById(R.id.list_sports);
-        sportsAdapter = new NewsAdapter(Objects.requireNonNull(getContext()), MyArticleModel.getListFilter(listRes,3));
-        listView.setAdapter(sportsAdapter);
-        //This let us set every item clickable LUEGO DESCOMENTARTodo
+        listView = root.findViewById(R.id.list_userArticles);
+        userAdapter = new NewsAdapter(Objects.requireNonNull(getContext()), listRes);
+       // userAdapter = new NewsAdapter(Objects.requireNonNull(getContext()), MyArticleModel.getListFilter(listRes,2));
+        listView.setAdapter(userAdapter);
+
+        //This let us set every item clickable
         listView.setClickable(true);
 
-        listView.setOnScrollListener(new AbsListView.OnScrollListener() {
+      /*  listView.setOnScrollListener(new AbsListView.OnScrollListener() {
             @Override
             public void onScrollStateChanged(AbsListView view, int scrollState) {
-
             }
 
-            @Override
+           /* @Override
             public void onScroll(AbsListView view, int firstVisibleItem, int visibleItemCount, int totalItemCount) {
                 if (view.getLastVisiblePosition()==totalItemCount-1 && !isLoading){
                     isLoading=true;
-                    Thread thread = new ThreadGetMoreArticles();
+                    Thread thread = new UserFragment.ThreadGetMoreArticles();
                     thread.start();
                 }
-            }
-        });
+            }*/
+        //)};
     }
 
     public class MyHandler extends Handler {
@@ -95,7 +91,7 @@ public class SportsFragment extends Fragment {
                     break;
                 case 1:
                     //Update data adapater and UI
-                    sportsAdapter.addArticlesList((List<Article>) msg.obj);
+                    userAdapter.addArticlesList((List<Article>) msg.obj);
 
                     //To remove footer View
                     listView.removeFooterView(footerView);
@@ -116,11 +112,12 @@ public class SportsFragment extends Fragment {
             //Look for more data
             List<Article> getList= null;
             try {
-                getList = new ArrayList<Article>(ArticleDB.getArticles());
+                getList = new ArrayList<Article>(ArticleDB.loadArticles());
             } catch (ParseException e) {
                 e.printStackTrace();
             }
-            getList=MyArticleModel.getListFilter(getList,3);
+            getList= MyArticleModel.getListFilter(getList,2);
+           // getList = new ArrayList<Article>(ArticleDB.getUserArticles(ArticleDB.getUserId(FirebaseAuth.getInstance().getCurrentUser().getEmail())));
 
             try {
                 Thread.sleep(3000);
@@ -133,6 +130,4 @@ public class SportsFragment extends Fragment {
 
         }
     }
-
-
 }

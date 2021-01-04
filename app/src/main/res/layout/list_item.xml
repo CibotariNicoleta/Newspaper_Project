@@ -5,76 +5,93 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/relativeLayout"
     android:layout_width="match_parent"
-    android:layout_height="600dp">
+    android:layout_height="430dp">
 
     <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
         android:id="@+id/myCard"
-        android:layout_height="438dp">
+        android:layout_height="338dp">
 
-        <RelativeLayout
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="438dp">
+            android:background="@drawable/salt"
+            android:orientation="vertical"
+            android:layout_height="338dp">
+
+            <LinearLayout
+                android:id="@+id/liniar"
+                android:layout_width="match_parent"
+                android:layout_height="120dp">
 
             <ImageView
                 android:id="@+id/image"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="250dp"
+                android:layout_height="120dp"
                 android:scaleType="fitXY"
                 android:adjustViewBounds="false"
                 />
 
-        <TextView
-            android:id="@+id/newsCategory"
-            android:layout_width="match_parent"
-            android:layout_height="55dp"
-            android:layout_centerHorizontal="true"
-            android:layout_marginLeft="30dp"
-            android:layout_marginTop="10dp"
-            android:layout_marginEnd="30dp"
-            android:layout_marginRight="30dp"
-            android:layout_marginBottom="30dp"
-            android:gravity="center"
-            android:text="@string/category"
-            android:textColor="@android:color/black"
-            android:textSize="25sp" />
+               <RelativeLayout
+                   android:layout_width="wrap_content"
+                   android:layout_height="wrap_content">
+                   <TextView
+                       android:id="@+id/newsCategory"
+                       android:layout_width="244dp"
+                       android:layout_height="36dp"
+                       android:layout_marginTop="10dp"
+                       android:layout_marginBottom="10dp"
+                       android:fontFamily="@font/advent_pro_medium"
+                       android:gravity="left"
+                       android:text="@string/category"
+                       android:textColor="@android:color/black"
+                       android:textSize="25sp" />
 
-        <TextView
-            android:id="@+id/newsTitle"
-            android:layout_width="378dp"
-            android:layout_height="108dp"
-            android:layout_below="@id/newsCategory"
-            android:layout_centerHorizontal="true"
-            android:gravity="center_horizontal"
-            android:text="@string/tittle"
-            android:textColor="@android:color/black"
-            android:textSize="25sp" />
+                   <TextView
+                       android:id="@+id/date_and_time"
+                       android:layout_width="200dp"
+                       android:layout_height="50dp"
+                       android:layout_below="@id/newsCategory"
+                       android:fontFamily="@font/advent_pro_medium"
+                       android:layout_marginTop="0dp"
+                       android:textColor="@android:color/black"
+                       android:ems="10"
+                       android:gravity="left"
+                       android:inputType="time"
+                       tools:ignore="TextFields" />
+
+               </RelativeLayout>
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/newsTitle"
+                android:layout_width="match_parent"
+                android:layout_height="110dp"
+                android:layout_below="@id/liniar"
+                android:fontFamily="@font/advent_pro_bold"
+                android:gravity="center_horizontal"
+                android:text="Title"
+                android:textColor="@android:color/black"
+                android:textSize="30sp" />
 
             <TextView
                 android:id="@+id/newsAbstract"
-                android:layout_width="371dp"
-                android:layout_height="167dp"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
                 android:layout_below="@id/newsTitle"
+                android:layout_marginTop="0dp"
                 android:layout_marginLeft="20dp"
                 android:layout_marginRight="20dp"
+                android:fontFamily="@font/advent_pro_semibold"
                 android:gravity="center"
                 android:text="@string/newsabstract"
                 android:textColor="@android:color/black"
-                android:textSize="12sp" />
+                android:textSize="18sp" />
 
-            <EditText
-                android:id="@+id/date_and_time"
-                android:layout_width="200dp"
-                android:layout_height="50dp"
-                android:layout_below="@+id/newsAbstract"
-                android:layout_marginTop="10dp"
-                android:ems="10"
-                android:layout_centerHorizontal="true"
-                android:gravity="center"
-                android:inputType="time"
-                tools:ignore="TextFields" />
 
-        </RelativeLayout>
+
+
+
+        </LinearLayout>
 
     </androidx.cardview.widget.CardView>
     <com.google.android.material.floatingactionbutton.FloatingActionButton
@@ -87,7 +104,7 @@
         android:layout_centerHorizontal="true"
         android:layout_marginEnd="268dp"
         android:layout_marginRight="268dp"
-        android:layout_marginBottom="92dp"
+        android:layout_marginBottom="28dp"
         android:clickable="true"
         app:srcCompat="@drawable/ic_delete_black_24dp"
         android:focusable="true" />
@@ -101,7 +118,7 @@
         android:layout_alignParentBottom="true"
         android:layout_marginStart="270dp"
         android:layout_marginLeft="270dp"
-        android:layout_marginBottom="92dp"
+        android:layout_marginBottom="28dp"
         android:clickable="true"
         app:srcCompat="@drawable/ic_update_black_24dp"
         android:focusable="true" />

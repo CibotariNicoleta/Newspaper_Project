@@ -16,6 +16,17 @@
         <item name="windowNoTitle">true</item>
     </style>
 
+    <style name="menuStyle"
+        parent = "Theme.AppCompat.Light">
+        <item name="android:background">@android:color/white</item>
+    </style>
+
+    <style name="loginHeader">
+        <item name="android:textColor">@color/colorPrimaryDark</item>
+        <item name="android:textSize">@dimen/headerTextSize</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+
 
 
 </resources>

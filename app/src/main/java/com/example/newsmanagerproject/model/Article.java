@@ -4,13 +4,13 @@ import android.os.Build;
 
 import androidx.annotation.RequiresApi;
 
-import java.io.Serializable;
-import java.util.Date;
-import java.util.Hashtable;
+import com.example.newsmanagerproject.network.errors.ServerComnmunicationError;
 
 import org.json.simple.JSONObject;
 
-import com.example.newsmanagerproject.network.errors.ServerComnmunicationError;
+import java.io.Serializable;
+import java.util.Date;
+import java.util.Hashtable;
 
 
 public class Article extends ModelEntity implements Serializable {
@@ -26,6 +26,7 @@ public class Article extends ModelEntity implements Serializable {
     private String thumbnail;
     private Date lastUpdate;
     private String imageData;
+    private byte[] imageByte;
     @RequiresApi(api = Build.VERSION_CODES.N)
     private String parseStringFromJson(JSONObject jsonArticle, String key, String def){
         Object in = jsonArticle.getOrDefault(key,def);
@@ -58,6 +59,14 @@ public class Article extends ModelEntity implements Serializable {
 
     public String getImageData() {
         return imageData;
+    }
+
+    public byte[] getImageByte() {
+        return imageByte;
+    }
+
+    public void setImageByte(byte[] imageByte) {
+        this.imageByte = imageByte;
     }
 
     public void setImageData(String imageData) {
@@ -129,12 +138,12 @@ public class Article extends ModelEntity implements Serializable {
     }
 
     public void setId(int id){
-        if (id <1){
+       /* if (id <1){
             throw new IllegalArgumentException("ERROR: Error setting a wrong id to an article:"+id);
         }
         if (this.id>0 ){
             throw new IllegalArgumentException("ERROR: Error setting an id to an article with an already valid id:"+this.id);
-        }
+        }*/
         this.id = id;
     }
 

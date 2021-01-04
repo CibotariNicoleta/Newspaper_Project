@@ -1,41 +1,27 @@
 package com.example.newsmanagerproject.model;
 
 import android.content.Context;
-import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AbsListView;
-import android.widget.AdapterView;
 import android.widget.ListView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentActivity;
-import androidx.lifecycle.LifecycleOwner;
-import androidx.lifecycle.Observer;
-import androidx.lifecycle.ViewModelProvider;
-import androidx.lifecycle.ViewModelStoreOwner;
 
-import com.example.newsmanagerproject.LoadArticlesTask;
-import com.example.newsmanagerproject.Login;
 import com.example.newsmanagerproject.MyArticleModel;
 import com.example.newsmanagerproject.R;
-import com.example.newsmanagerproject.database.ArticleDB;
-import com.google.android.material.floatingactionbutton.FloatingActionButton;
-import com.google.android.material.snackbar.Snackbar;
 
 import java.text.ParseException;
 import java.util.ArrayList;
-import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
-import java.util.concurrent.ExecutionException;
 
 public class AllFragment extends Fragment {
 
@@ -54,9 +40,11 @@ public class AllFragment extends Fragment {
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
+        // ****Modified here, needs to  change back
         try {
-            listRes = new ArrayList<>(MyArticleModel.getArticles());
+            //listRes = ArticleDB.loadAllMessages();
+            listRes = new ArrayList<>(MyArticleModel.getArticles()); //from database
+            Collections.reverse(listRes);
         } catch (ParseException e) {
             e.printStackTrace();
         }

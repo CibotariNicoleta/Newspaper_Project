@@ -13,6 +13,28 @@ public class DatabaseConstants {
     public static final String DB_TABLE_FIELD_ARTICLE_THUMBNAIL = "thumbnail";
     public static final String DB_TABLE_FIELD_ARTICLE_LASTUPDATE = "lastupdate";
     public static final String DB_TABLE_FIELD_ARTICLE_IMAGEDATA = "imageData";
+    public static final String DB_TABLE_FIELD_ARTICLE_IMAGEBYTES = "imageBytes";
+    public static final String DB_TABLE_FIELD_ARTICLE_LOCATION = "location";
+
+    public static final String DB_TABLE_USER = "User_table";
+    public static final String DB_TABLE_FIELD_USER_ID = "userId";
+    public static final String DB_TABLE_FIELD_USER_NAME = "userName";
+    public static final String DB_TABLE_FIELD_USER_EMAIL = "userEmail";
+    public static final String DB_TABLE_FIELD_USER_PASSWORD = "userPassword";
+    public static final String DB_TABLE_FIELD_USER_IMAGE = "userImage";
+
+    public static final String DB_TABLE_LOCATION = "User_location";
+    public static final String DB_TABLE_FIELD_LOCATION_ID = "locationId";
+    public static final String DB_TABLE_FIELD_LONGITUDINE = "longitudine";
+    public static final String DB_TABLE_FIELD_LATITUDINE = "latitudine";
+    public static final String DB_TABLE_FIELD_ARTICLE_ID_LOCATION = "articleId";
+
+    public static final String DB_CREATE_TABLE_LOCATION =
+            "CREATE TABLE IF NOT EXISTS " + DB_TABLE_LOCATION+"( "+
+                    "locationId INTEGER PRIMARY KEY AUTOINCREMENT, "+
+                    "longitudine REAL"+
+                    "latitudine REAL"+
+                    "articleId Integer"+");";
 
     public static final String DB_CREATE_TABLE_ARTICLE =
             "CREATE TABLE IF NOT EXISTS "+DB_TABLE_ARTICLE_NAME+" ( " +
@@ -27,6 +49,18 @@ public class DatabaseConstants {
                     "    thumbnail TEXT, " +
                     "    lastupdate INTEGER, " +
                     "    imageData TEXT " +
+                    "    imageBytes TEXT " +
+                   // "    location INTEGER" +
+                   // "    FOREIGN KEY (idUSer) REFERENCES User_table (userId)" +
+                    ");";
+
+    public static final String DB_CREATE_TABLE_USER =
+            "CREATE TABLE IF NOT EXISTS "+DB_TABLE_USER+" ( " +
+                    "    userId INTEGER PRIMARY KEY AUTOINCREMENT, " +
+                    "    userName TEXT, " +
+                    "    userEmail TEXT, " +
+                    "    userPassword TEXT " +
+                    "    userImage TEXT" +
                     ");";
 
 }

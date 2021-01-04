@@ -29,11 +29,13 @@ public class UpdateArticleTask extends AsyncTask<Void, Void, Void> {
     protected Void doInBackground(Void...voids) {
 
         try {
-            int res=ModelManager.saveArticle(article);
+            int res=ModelManager.updateArticle(article, article.getId());
             if(res!=0){
                 Article articleUpdated=ModelManager.getArticle(res);
                 ArticleDB.updateArticle(articleUpdated);
                 MyArticleModel.updateArticle(articleUpdated,res);
+            }else{
+                ArticleDB.updateArticle(article);
             }
 
         } catch (ServerComnmunicationError serverComnmunicationError) {

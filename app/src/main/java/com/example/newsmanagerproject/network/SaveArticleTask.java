@@ -8,11 +8,14 @@ import androidx.annotation.RequiresApi;
 
 import com.example.newsmanagerproject.database.ArticleDB;
 import com.example.newsmanagerproject.model.Article;
+import com.example.newsmanagerproject.model.CreatArticle;
 import com.example.newsmanagerproject.network.errors.ServerComnmunicationError;
+import com.google.firebase.auth.FirebaseAuth;
 
 public class SaveArticleTask extends AsyncTask<Void, Void, Void> {
  Context context;
  Article article;
+ FirebaseAuth auth;
     public SaveArticleTask(Context cont, Article article) {
         super();
         this.context = cont;
@@ -27,11 +30,24 @@ public class SaveArticleTask extends AsyncTask<Void, Void, Void> {
     @Override
     protected Void doInBackground(Void...voids) {
 
+        byte[] imageByte = article.getImageByte();
+
+        article.setImageByte(null);
         try {
             int res=ModelManager.saveArticle(article);
-            if(res!=0){
+       //    int a =  article.getIdUser();
+            if(res!=0){ // modified here
                 Article articleAdd=ModelManager.getArticle(res);
+                auth = FirebaseAuth.getInstance();
+                int userId = ArticleDB.getUserId(auth.getCurrentUser().getEmail());
+               // articleAdd.setImageData(image.getImage());
+                articleAdd.setImageByte(imageByte);
+                articleAdd.setIdUser(userId);
+                CreatArticle.articleId = articleAdd.getId();
                 ArticleDB.saveNewMessage(articleAdd);
+            }else{
+                article.setImageByte(imageByte);
+                ArticleDB.saveNewMessage(article);
             }
 
         } catch (ServerComnmunicationError serverComnmunicationError) {
@@ -40,4 +56,6 @@ public class SaveArticleTask extends AsyncTask<Void, Void, Void> {
 
         return null;
     }
+
+
 }

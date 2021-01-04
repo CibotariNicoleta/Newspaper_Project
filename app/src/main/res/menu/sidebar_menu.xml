@@ -11,10 +11,17 @@
             android:icon="@drawable/ic_addarticle"
             android:title="@string/create_nav"
             android:visible="false" />
+
     </group>
 
     <item android:title="@string/categories_category">
         <menu>
+            <item
+                android:id="@+id/nav_userpage"
+                android:icon="@drawable/ic_baseline_person_outline_24"
+                android:title="@string/nav_userpage"
+                android:visible="false"/>
+
             <item
                 android:id="@+id/category_national"
                 android:icon="@drawable/ic_symbol_national"

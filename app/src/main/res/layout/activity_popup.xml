@@ -7,6 +7,9 @@
     android:background="@color/design_default_color_primary_dark"
     android:orientation="vertical"
     tools:context=".model.PopActivity">
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
@@ -88,5 +91,6 @@
                 app:srcCompat="@drawable/ic_oki"
                 android:focusable="true" />
         </LinearLayout>
+    </ScrollView>
 
 </androidx.appcompat.widget.LinearLayoutCompat>

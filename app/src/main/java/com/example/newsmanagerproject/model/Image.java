@@ -8,9 +8,6 @@ import org.json.simple.JSONObject;
 
 import java.util.Hashtable;
 
-import com.example.newsmanagerproject.model.Logger;
-import com.example.newsmanagerproject.model.SerializationUtils;
-
 
 public class Image extends ModelEntity {
     private int order;
@@ -52,6 +49,9 @@ public class Image extends ModelEntity {
         }
     }
 
+    public Image(String image){
+        this.image = image;
+    }
     /**
      *
      * @return

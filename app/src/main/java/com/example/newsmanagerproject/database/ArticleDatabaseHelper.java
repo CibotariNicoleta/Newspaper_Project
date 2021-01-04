@@ -4,15 +4,9 @@ import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
-
-import com.example.newsmanagerproject.model.Article;
-import com.example.newsmanagerproject.network.errors.ServerComnmunicationError;
-
-import static com.example.newsmanagerproject.database.DatabaseConstants.DB_TABLE_ARTICLE_NAME;
-
 public class ArticleDatabaseHelper extends SQLiteOpenHelper {
     private static final String DATABASE_NAME = "Articles_DB";
-    private static final int DATABASE_VERSION = 3;
+    private static final int DATABASE_VERSION = 11;
 
     public ArticleDatabaseHelper(Context context){
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
@@ -21,14 +15,24 @@ public class ArticleDatabaseHelper extends SQLiteOpenHelper {
     @Override
     public void onCreate(SQLiteDatabase sqLiteDatabase) {
         // crear la estructura y datos initicales de la base de datos
+        sqLiteDatabase.execSQL(DatabaseConstants.DB_CREATE_TABLE_USER);
         sqLiteDatabase.execSQL(DatabaseConstants.DB_CREATE_TABLE_ARTICLE);
+        sqLiteDatabase.execSQL(DatabaseConstants.DB_CREATE_TABLE_LOCATION);
+
     }
 
     @Override
     public void onUpgrade(SQLiteDatabase sqLiteDatabase, int oldVersion, int newVersion) {
         // ejecutar lo scripts necesarios (SQL) para actualizar
         // de la versón vieja (oldVersion) a la nueva (newVersion)
-        sqLiteDatabase.execSQL("DROP TABLE IF EXISTS " + DB_TABLE_ARTICLE_NAME);
+        if (newVersion > oldVersion) {
+            //sqLiteDatabase.execSQL(DatabaseConstants.DB_CREATE_TABLE_LOCATION);
+            sqLiteDatabase.execSQL("ALTER TABLE "+ DatabaseConstants.DB_TABLE_LOCATION + " ADD COLUMN latitudine DOUBLE ");
+            sqLiteDatabase.execSQL("ALTER TABLE "+ DatabaseConstants.DB_TABLE_LOCATION + " ADD COLUMN articleId INTEGER ");
+        }
+      // sqLiteDatabase.execSQL("DROP TABLE IF EXISTS " + DatabaseConstants.DB_TABLE_LOCATION);
+       // sqLiteDatabase.execSQL("DROP TABLE IF EXISTS " + DB_TABLE_ARTICLE_NAME);
+
         //added here
          onCreate(sqLiteDatabase);
     }

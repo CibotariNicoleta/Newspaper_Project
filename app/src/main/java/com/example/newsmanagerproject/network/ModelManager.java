@@ -4,26 +4,21 @@ import android.os.Build;
 
 import androidx.annotation.RequiresApi;
 
-import java.io.BufferedReader;
-import java.io.DataOutputStream;
-import java.io.IOException;
-
 import com.example.newsmanagerproject.model.Article;
 import com.example.newsmanagerproject.model.Image;
+import com.example.newsmanagerproject.model.Logger;
 import com.example.newsmanagerproject.network.errors.AuthenticationError;
 import com.example.newsmanagerproject.network.errors.ServerComnmunicationError;
 
-import java.io.InputStreamReader;
-import java.io.OutputStream;
+import org.json.simple.JSONObject;
+
+import java.io.IOException;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Properties;
-import com.example.newsmanagerproject.model.Logger;
-
-import org.json.simple.JSONObject;
 
 import static com.example.newsmanagerproject.network.ServiceCallUtils.parseHttpStreamResult;
 
@@ -313,11 +308,12 @@ public class ModelManager {
                 Logger.log(Logger.INFO, "Object inserted, returned id:" + id);
                 return id;
             } else {
-                //throw new ServerComnmunicationError(connection.getResponseMessage());
+               // throw new ServerComnmunicationError(connection.getResponseMessage());
             }
         } catch (Exception e) {
             Logger.log(Logger.ERROR, "Inserting article [" + a + "] : " + e.getClass() + " ( " + e.getMessage() + ")");
-            throw new ServerComnmunicationError(e.getClass() + " ( " + e.getMessage() + ")");
+            return 0;
+            //throw new ServerComnmunicationError(e.getClass() + " ( " + e.getMessage() + ")");
         }
 
         return 0;
@@ -387,7 +383,8 @@ public class ModelManager {
             }
         } catch (Exception e) {
             Logger.log(Logger.ERROR, "Inserting article [" + a + "] : " + e.getClass() + " ( " + e.getMessage() + ")");
-            throw new ServerComnmunicationError(e.getClass() + " ( " + e.getMessage() + ")");
+            return 0;
+            //throw new ServerComnmunicationError(e.getClass() + " ( " + e.getMessage() + ")");
         }
 
         return 0;

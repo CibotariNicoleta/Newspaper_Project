@@ -4,13 +4,10 @@ import android.content.Context;
 import android.os.AsyncTask;
 import android.os.Build;
 import android.util.Log;
-import android.widget.Toast;
 
 import androidx.annotation.RequiresApi;
 
-import com.example.newsmanagerproject.database.ArticleDB;
 import com.example.newsmanagerproject.model.Article;
-import com.example.newsmanagerproject.model.MainActivity;
 import com.example.newsmanagerproject.network.ModelManager;
 import com.example.newsmanagerproject.network.errors.AuthenticationError;
 import com.example.newsmanagerproject.network.errors.ServerComnmunicationError;
@@ -23,7 +20,6 @@ import static com.example.newsmanagerproject.network.RESTConnection.ATTR_REQUIRE
 import static com.example.newsmanagerproject.network.RESTConnection.ATTR_SERVICE_URL;
 
 public class LoadArticlesTask extends AsyncTask<Void, Void, List<Article>> {
-
     private static final String TAG = "LoadArticlesTask";
     private static int offset = 0;
     Context context;
@@ -58,7 +54,7 @@ public class LoadArticlesTask extends AsyncTask<Void, Void, List<Article>> {
                 // obtain 6 articles from offset 0
                 Log.d("El usuario es ->", ModelManager.getIdUser());
                 Log.d("Con la clave de API->", ModelManager.getLoggedApiKey());
-                res = ModelManager.getArticles(10, offset);
+                res = ModelManager.getArticles(30, offset);//here was 10
                 int index = res.size();
                 if (index != 0) {
                     offset = offset + index;
